@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GestorEventos.Servicios.Entidades
 {
+    // EXPERIMENTO GITHUB - karen
     public class Evento
     {
         public int IdEvento { get; set; }
