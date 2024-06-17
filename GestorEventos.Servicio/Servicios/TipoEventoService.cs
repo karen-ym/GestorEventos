@@ -36,7 +36,7 @@ namespace GestorEventos.Servicios.Servicios
             } else {
                 return tiposDeEvento.First();
             }
-
+            
         }
     }
 
