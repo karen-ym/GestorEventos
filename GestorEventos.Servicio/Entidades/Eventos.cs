@@ -24,5 +24,8 @@ namespace GestorEventos.Servicios.Entidades
 
         public bool Visible { get; set; } // Borrado lógico.
 
+        //prueba 
+        public bool borrado { get; set; }
+
     }
 }
