@@ -8,6 +8,12 @@ namespace GestorEventos.API.Controllers
     [Route("[controller]")]
     public class PersonaController : Controller
     {
+        private IPersonaService personaService;
+
+        public PersonaController(IPersonaService _personaService)
+        {
+            personaService = _personaService;
+        }
         [HttpGet]
         public IActionResult Get() {
             PersonaService personaService = new PersonaService();
@@ -28,12 +34,38 @@ namespace GestorEventos.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostPersona([FromBody] Persona persona) {
-            PersonaService personaService = new PersonaService();
+        public IActionResult PostPersona([FromBody] Persona persona) 
+        {
 
-            // personaService.AddNuevaPersona(persona);
+             personaService.AgregarNueva(persona);
 
             return Ok();
+        }
+
+        [HttpPatch("borradologico/{idPersona:int}")]
+        public IActionResult BorradoLogicoPersona(int idPersona)
+        {
+
+            personaService.BorrarL(idPersona);
+
+            return Ok();
+        }
+
+        [HttpDelete("{idPersona:int}")]
+        public IActionResult BorradoFisico(int idPersona)
+        {
+            personaService.BorrarF(idPersona);
+
+            return Ok();
+        }
+        [HttpPut("{idPersona:int}")]
+        public IActionResult PutPersona(int idPersona, [FromBody] Persona persona)
+        {
+
+            personaService.Modificar(idPersona, persona);
+
+            return Ok();
+
         }
     }
 }
