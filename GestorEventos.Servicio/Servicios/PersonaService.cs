@@ -18,31 +18,12 @@ namespace GestorEventos.Servicios.Servicios
         public IEnumerable<Persona> PersonasDePrueba { get; set; }
 
         private String _connectionString; // BBDD
+        // Password=wordPASS#;Persist Security Info=True;User ID=admin_1;Initial Catalog=DDBBEventos;Data Source=servidor-eventos-app.database.windows.net
 
         // Constructor
         public PersonaService() {
 
-            _connectionString = ""; //string que sale de crear la bbdd - no explica como hacerlo
-
-            /*PersonasDePrueba = new List<Persona>
-            {
-                    new Persona { 
-                    IdPersona = 1,
-                    Nombre = "Esteban",
-                    Apellido = "Quito",
-                    Direccion = "452 Diaz",
-                    Email = "dskjds@gmail.com",
-                    Telefono = "2154236412"
-                    },
-                    new Persona {
-                    IdPersona = 2,
-                    Nombre = "Raquel",
-                    Apellido = "Sita",
-                    Direccion = "452 Diaz",
-                    Email = "iyuiy@gmail.com",
-                    Telefono = "4545645"
-                    }
-            };*/
+            _connectionString = "Password=wordPASS#;Persist Security Info=True;User ID=admin_1;Initial Catalog=DDBBEventos;Data Source=servidor-eventos-app.database.windows.net";
         }
 
         public IEnumerable<Persona> GetPersonasDePrueba() {
@@ -51,26 +32,44 @@ namespace GestorEventos.Servicios.Servicios
             using (IDbConnection db = new SqlConnection(_connectionString)) // 
             {
                 // Utiliza Dapper (dependencias/paquetes) para ejecutar una consulta SQL y mapear los resultados a una lista de objetos Persona
-                List<Persona> personas = db.Query<Persona>("SELECT * FROM Personas").ToList();
+                List<Persona> personas = db.Query<Persona>("SELECT * FROM Personas WHERE Borrado = 0").ToList();
                 return personas;
             }
         }
 
         public Persona? GetPersonaDePruebaSegunId(int IdPersona)
         {
+            // al profe le marca el mismo error en clase, pero a el le corría el código
             using (IDbConnection db = new SqlConnection(_connectionString)) {
                 Persona persona = db.Query<Persona>("SELECT * FROM Personas WHERE IdPersona = " + IdPersona.ToString().FirstOrDefault());
                 return persona;
             }
+        }
 
-                /*try
-                {
-                    Persona persona = PersonasDePrueba.Where(x => x.IdPersona == IdPersona).First();
-                    return persona;
-                }
-                catch (Exception ex) {
-                    return null;
-                }*/
+        public int AgregarNuevaPersona(Persona persona) {
+            using (IDbConnection db = new SqlConnection(_connectionString)) {
+                string query = "INSERT INTO Personas (Nombre, Apellido, Direccion, Telefono, Email) VALUES ( @Nombre, @Apellido, @Direccion, @Telefono, @Email); SELECT Inserted.IdPersona";
+                db.Execute(query, persona);
+
+                return persona.IdPersona;
+            }
+        }
+
+        public bool ModificarPersona(int idPersona, Persona persona)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString)) {
+                string query = "UPDATE Personas SET Nombre = @Nombre, Apellido = @Apellido, Direccion = @Direccion, Telefono = @Telefono, Email = @Email WHERE IdPersona = " + idPersona.ToString(); // se concatena idPersona pq dapper puede dar error  
+                db.Execute(query, persona);
+                return true;
+            }
+        }
+
+        public bool BorrarLogicamentePersona (int idPersona) {
+            using (IDbConnection db = new SqlConnection(_connectionString)) {
+                string query = "UPDATE Personas SET Borrado = 1 where IdPersona = " + idPersona.ToString();
+                db.Execute(query);
+                return true;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GestorEventos.Servicios.Servicios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace GestorEventos.Servicios.Entidades
 {
-    // EXPERIMENTO GITHUB - karen
     public class Evento
     {
         public int IdEvento { get; set; }
@@ -23,9 +23,14 @@ namespace GestorEventos.Servicios.Entidades
         public int IdPersonaContacto { get; set; }
 
         public bool Visible { get; set; } // Borrado lógico.
+    }
 
-        //prueba 
-        public bool borrado { get; set; }
-
+    public class EventoModel // Version compleja del evento.
+    {
+        public Evento evento { get; set; }
+        public Persona PersonaContacto { get; set; }
+        public Persona PersonaAgasajada { get; set; }
+        public IEnumerable<Servicio> ListaDeServiciosContratados { get; set; }
     }
 }
+ 

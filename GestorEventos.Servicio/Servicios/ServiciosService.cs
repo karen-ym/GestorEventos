@@ -9,22 +9,22 @@ namespace GestorEventos.Servicios.Servicios
 {
     public class ServiciosService // La clase ServiciosService es responsable de gestionar los servicios.
     {
-        public IEnumerable<ServiciosVM> Servicios { get; set; }
+        public IEnumerable<Servicio> Servicios { get; set; }
 
         // Constructor
         public ServiciosService() {
-            this.Servicios = new List<ServiciosVM> {
-                new ServiciosVM { IdServicio = 1, Descripcion = "Bar hopping", PrecioServicio = 25000},
-                new ServiciosVM { IdServicio = 2, Descripcion = "Servicio de Transporte", PrecioServicio = 20000},
-                new ServiciosVM { IdServicio = 3, Descripcion = "Entradas de Boliches Incluidas", PrecioServicio = 10000}
+            this.Servicios = new List<Servicio> {
+                new Servicio { IdServicio = 1, Descripcion = "Bar hopping", PrecioServicio = 25000},
+                new Servicio { IdServicio = 2, Descripcion = "Servicio de Transporte", PrecioServicio = 20000},
+                new Servicio { IdServicio = 3, Descripcion = "Entradas de Boliches Incluidas", PrecioServicio = 10000}
             };
         }
 
-        public IEnumerable<ServiciosVM> GetServicios() { 
+        public IEnumerable<Servicio> GetServicios() { 
             return this.Servicios;
         }
 
-        public ServiciosVM GetServiciosPorId(int IdServicio) {
+        public Servicio GetServiciosPorId(int IdServicio) {
             var servicios = Servicios.Where(x => x.IdServicio == IdServicio);
 
             if (servicios == null){
@@ -34,12 +34,12 @@ namespace GestorEventos.Servicios.Servicios
             return servicios.First();
         }
 
-        public bool AgregarServicio(ServiciosVM servicio) {
+        public bool AgregarServicio(Servicio servicio) {
 
-            // Se intenta agregar el nuevo objeto ServiciosVM a la colección.
+            // Se intenta agregar el nuevo objeto Servicio a la colección.
             try
             {
-                List<ServiciosVM> lista = this.Servicios.ToList(); // Convierte a la colección de objetos ServiciosVM en una lista.
+                List<Servicio> lista = this.Servicios.ToList(); // Convierte a la colección de objetos Servicio en una lista.
                 lista.Add(servicio); // Se agrega obj a la lista.
                 // this.Servicios.ToList().Add(servicio); // Se agrega obj a la coleccion - por ahora no sirve para nada
                 return true;

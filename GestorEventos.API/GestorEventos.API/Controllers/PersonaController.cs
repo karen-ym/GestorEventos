@@ -30,9 +30,22 @@ namespace GestorEventos.API.Controllers
         [HttpPost]
         public IActionResult PostPersona([FromBody] Persona persona) {
             PersonaService personaService = new PersonaService();
+            personaService.AgregarNuevaPersona(persona);
+            return Ok(); 
+        }
 
-            // personaService.AddNuevaPersona(persona);
+        [HttpPut("{idPersona:int}")]
+        public IActionResult PutPersona(int idPersona, [FromBody] Persona persona) { 
+            PersonaService personaService = new PersonaService();
+            personaService.ModificarPersona(idPersona, persona);
+            return Ok();
+        }
 
+        [HttpPatch("borradologico/{idPersona:int}")]
+        public ActionResult BorradoLogicoPersona(int idPersona)
+        {
+            PersonaService personaService = new PersonaService();
+            personaService.BorrarLogicamentePersona(idPersona);
             return Ok();
         }
     }

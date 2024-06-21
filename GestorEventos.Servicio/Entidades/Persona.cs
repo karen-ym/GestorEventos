@@ -24,5 +24,7 @@ namespace GestorEventos.Servicios.Entidades
         public string Telefono { get; set; }
 
         public string Email { get; set; }
+
+        public string Borrado { get; set; }  
     }
 }
