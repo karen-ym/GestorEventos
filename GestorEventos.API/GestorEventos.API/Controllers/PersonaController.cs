@@ -15,17 +15,17 @@ namespace GestorEventos.API.Controllers
         }
 
         [HttpGet("{idPersona:int}")]
-        public IActionResult GetPersonaPorId(int idPersona) { 
+        /*public IActionResult GetPersonaPorId(int idPersona) { 
             PersonaService personaService = new PersonaService();
-            Persona? persona = personaService.GetPersonaDePruebaSegunId(idPersona);
+            // Persona? persona = personaService.GetPersonaDePruebaSegunId(idPersona); PARA LA COMPILACION
 
             if (persona == null) { 
                 return NotFound();
             }
             else {
                 return Ok(persona);
-            }
-        }
+            } PARA LA COMPILACION 
+        } */
 
         [HttpPost]
         public IActionResult PostPersona([FromBody] Persona persona) {

@@ -15,4 +15,6 @@ namespace GestorEventos.Servicios.Entidades
 
         public decimal PrecioServicio { get; set; }
     }
+
+
 }

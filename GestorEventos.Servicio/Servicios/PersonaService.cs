@@ -37,14 +37,14 @@ namespace GestorEventos.Servicios.Servicios
             }
         }
 
-        public Persona? GetPersonaDePruebaSegunId(int IdPersona)
+        /*public Persona? GetPersonaDePruebaSegunId(int IdPersona)
         {
             // al profe le marca el mismo error en clase, pero a el le corría el código
             using (IDbConnection db = new SqlConnection(_connectionString)) {
                 Persona persona = db.Query<Persona>("SELECT * FROM Personas WHERE IdPersona = " + IdPersona.ToString().FirstOrDefault());
                 return persona;
             }
-        }
+        }*/
 
         public int AgregarNuevaPersona(Persona persona) {
             using (IDbConnection db = new SqlConnection(_connectionString)) {

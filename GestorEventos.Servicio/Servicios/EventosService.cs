@@ -93,8 +93,8 @@ namespace GestorEventos.Servicios.Servicios
             this.PostNuevoEvento(eventoModel.evento);
 
             foreach (Servicio servicio in eventoModel.ListaDeServiciosContratados) {
-                ServiciosService servicioService = new ServiciosService();
-                servicioService.AgregarServicio(servicio);
+                ServicioService servicioService = new ServicioService();
+                servicioService.AgregarNuevoServicio(servicio);
             }
 
         }
