@@ -1,7 +1,13 @@
+using GestorEventos.Servicios.Servicios;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddScoped<IEventoService, EventoService>();
+builder.Services.AddScoped<IPersonaService, PersonaService>();
 
 var app = builder.Build();
 
