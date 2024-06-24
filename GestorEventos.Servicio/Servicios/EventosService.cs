@@ -1,8 +1,12 @@
 ﻿using GestorEventos.Servicios.Entidades;
 using System;
+using Dapper;
+using System.Data;
+using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 using System.Threading.Tasks;
 
 namespace GestorEventos.Servicios.Servicios
