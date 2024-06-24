@@ -10,20 +10,19 @@ namespace GestorEventos.API.Controllers
     {
         private IPersonaService personaService;
 
-        public PersonaController(IPersonaService _personaService)
-        {
+        public PersonaController (IPersonaService _personaService) {
             personaService = _personaService;
         }
+
         [HttpGet]
         public IActionResult Get() {
-            PersonaService personaService = new PersonaService();
             return Ok(personaService.GetPersonasDePrueba());
         }
 
         [HttpGet("{idPersona:int}")]
-        public IActionResult GetPersonaPorId(int idPersona) { 
-            PersonaService personaService = new PersonaService();
-            Persona? persona = personaService.GetPersonaDePruebaSegunId(idPersona);
+        public IActionResult GetPersonaPorId(int idPersona) {
+
+            var persona = this.personaService.GetPersonasDePruebaSegunId(idPersona);
 
             if (persona == null) { 
                 return NotFound();
@@ -31,14 +30,25 @@ namespace GestorEventos.API.Controllers
             else {
                 return Ok(persona);
             }
-        }
+        } 
 
         [HttpPost]
-        public IActionResult PostPersona([FromBody] Persona persona) 
+        public IActionResult PostPersona([FromBody] Persona persona) {
+            personaService.AgregarNuevaPersona(persona);
+            return Ok(); 
+        }
+
+        [HttpPut("{idPersona:int}")]
+        public IActionResult PutPersona(int idPersona, [FromBody] Persona persona) { 
+            personaService.ModificarPersona(idPersona, persona);
+            return Ok();
+        }
+
+
+        [HttpPatch("borradologico/{idPersona:int}")]
+        public ActionResult BorradoLogicoPersona(int idPersona)
         {
-
-             personaService.AgregarNueva(persona);
-
+            personaService.BorrarLogicamentePersona(idPersona);
             return Ok();
         }
 

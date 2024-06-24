@@ -80,5 +80,23 @@ namespace GestorEventos.Servicios.Servicios
             }
         }
 
+        public void PostNuevoEventoCompleto(EventoModel eventoModel)
+        {
+            PersonaService personaService = new PersonaService();
+            int idPersonaAgasajada = personaService.AgregarNuevaPersona(eventoModel.PersonaAgasajada);
+            int idPersonaContacto = personaService.AgregarNuevaPersona(eventoModel.PersonaContacto);
+
+            eventoModel.evento.IdPersonaAgasajada = idPersonaAgasajada;
+            eventoModel.evento.IdPersonaContacto = idPersonaContacto;
+            eventoModel.evento.Visible = true;
+
+            this.PostNuevoEvento(eventoModel.evento);
+
+            foreach (Servicio servicio in eventoModel.ListaDeServiciosContratados) {
+                ServicioService servicioService = new ServicioService();
+                servicioService.AgregarNuevoServicio(servicio);
+            }
+
+        }
     };
 }

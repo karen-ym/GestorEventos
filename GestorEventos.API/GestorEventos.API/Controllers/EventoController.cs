@@ -6,7 +6,7 @@ namespace GestorEventos.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EventosController : ControllerBase
+    public class EventoController : ControllerBase
     {
         [HttpGet]
         public IActionResult GetEventos()
@@ -30,7 +30,7 @@ namespace GestorEventos.Api.Controllers
      
         }
 
-        [HttpPost("NuevoEvento")]
+        [HttpPost("Nuevo")]
         public IActionResult PostNuevoEvento([FromBody] Evento evento){
             EventoService eventoService = new EventoService();
             
@@ -43,6 +43,15 @@ namespace GestorEventos.Api.Controllers
             else {
                 return NotFound();
             }
+        }
+
+        [HttpPost("Nuevo EventoCompleto")]
+        public IActionResult PostNuevoEventoModel([FromBody] EventoModel evento)
+        {
+
+            EventoService eventoService = new EventoService();
+            eventoService.PostNuevoEventoCompleto(evento);
+            return Ok();
         }
 
         [HttpPut("{idEvento:int}/Modificar")]

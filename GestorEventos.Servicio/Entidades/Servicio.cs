@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GestorEventos.Servicios.Entidades
 {
-    public class ServiciosVM
+    public class Servicio
     {
         public int IdServicio { get; set; }
 
@@ -15,4 +15,6 @@ namespace GestorEventos.Servicios.Entidades
 
         public decimal PrecioServicio { get; set; }
     }
+
+
 }
