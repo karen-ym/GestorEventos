@@ -11,10 +11,9 @@ using System.Runtime.CompilerServices;
 
 namespace GestorEventos.Servicios.Servicios
 {
-    public interface IServicioService {  // K: Cambió nombre y de clase a interface
+    public interface IServicioService {
 
         bool AgregarNuevoServicio(Servicio servicio);
-        bool BorrarFisicamenteServicio(int idServicio);
         bool BorrarLogicamenteServicio(int idServicio);
         IEnumerable<Servicio> GetServicios();
         Servicio GetServiciosPorId(int IdServicio);

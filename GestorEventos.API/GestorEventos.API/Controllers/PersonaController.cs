@@ -8,35 +8,38 @@ namespace GestorEventos.API.Controllers
     [Route("[controller]")]
     public class PersonaController : Controller
     {
+        private IPersonaService personaService;
+
+        public PersonaController (IPersonaService _personaService) {
+            personaService = _personaService;
+        }
+
         [HttpGet]
         public IActionResult Get() {
-            PersonaService personaService = new PersonaService();
             return Ok(personaService.GetPersonasDePrueba());
         }
 
         [HttpGet("{idPersona:int}")]
-        /*public IActionResult GetPersonaPorId(int idPersona) { 
-            PersonaService personaService = new PersonaService();
-            // Persona? persona = personaService.GetPersonaDePruebaSegunId(idPersona); PARA LA COMPILACION
+        public IActionResult GetPersonaPorId(int idPersona) {
+
+            var persona = this.personaService.GetPersonasDePruebaSegunId(idPersona);
 
             if (persona == null) { 
                 return NotFound();
             }
             else {
                 return Ok(persona);
-            } PARA LA COMPILACION 
-        } */
+            }
+        } 
 
         [HttpPost]
         public IActionResult PostPersona([FromBody] Persona persona) {
-            PersonaService personaService = new PersonaService();
             personaService.AgregarNuevaPersona(persona);
             return Ok(); 
         }
 
         [HttpPut("{idPersona:int}")]
         public IActionResult PutPersona(int idPersona, [FromBody] Persona persona) { 
-            PersonaService personaService = new PersonaService();
             personaService.ModificarPersona(idPersona, persona);
             return Ok();
         }
@@ -44,7 +47,6 @@ namespace GestorEventos.API.Controllers
         [HttpPatch("borradologico/{idPersona:int}")]
         public ActionResult BorradoLogicoPersona(int idPersona)
         {
-            PersonaService personaService = new PersonaService();
             personaService.BorrarLogicamentePersona(idPersona);
             return Ok();
         }
