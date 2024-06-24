@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 
+
 namespace GestorEventos.Servicios.Servicios
 {
     public interface IUsuarioService

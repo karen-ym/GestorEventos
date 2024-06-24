@@ -44,11 +44,38 @@ namespace GestorEventos.API.Controllers
             return Ok();
         }
 
+
         [HttpPatch("borradologico/{idPersona:int}")]
         public ActionResult BorradoLogicoPersona(int idPersona)
         {
             personaService.BorrarLogicamentePersona(idPersona);
             return Ok();
+        }
+
+        [HttpPatch("borradologico/{idPersona:int}")]
+        public IActionResult BorradoLogicoPersona(int idPersona)
+        {
+
+            personaService.BorrarL(idPersona);
+
+            return Ok();
+        }
+
+        [HttpDelete("{idPersona:int}")]
+        public IActionResult BorradoFisico(int idPersona)
+        {
+            personaService.BorrarF(idPersona);
+
+            return Ok();
+        }
+        [HttpPut("{idPersona:int}")]
+        public IActionResult PutPersona(int idPersona, [FromBody] Persona persona)
+        {
+
+            personaService.Modificar(idPersona, persona);
+
+            return Ok();
+
         }
     }
 }
