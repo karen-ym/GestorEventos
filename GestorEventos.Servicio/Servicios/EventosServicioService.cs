@@ -12,8 +12,8 @@ namespace GestorEventos.Servicios.Servicios
 {
     public interface IEventosServiciosService
     {
-        IEnumerable<EventosServicios> GetServiciosPorEvento(int IdEvento);
-        int PostNuevoEventoServicio(EventosServicios relacionEventoServicio);
+        IEnumerable<EventoServicio> GetServiciosPorEvento(int IdEvento);
+        int PostNuevoEventoServicio(EventoServicio relacionEventoServicio);
     }
 
     public class EventosServiciosService : IEventosServiciosService
@@ -25,7 +25,7 @@ namespace GestorEventos.Servicios.Servicios
             _connectionString = "Password=wordPASS#;Persist Security Info=True;User ID=admin_1;Initial Catalog=DDBBEventos;Data Source=servidor-eventos-app.database.windows.net";
         }
 
-        public int PostNuevoEventoServicio(EventosServicios relacionEventoServicio)
+        public int PostNuevoEventoServicio(EventoServicio relacionEventoServicio)
         {
             try
             {
@@ -45,11 +45,11 @@ namespace GestorEventos.Servicios.Servicios
             }
         }
 
-        public IEnumerable<EventosServicios> GetServiciosPorEvento(int IdEvento)
+        public IEnumerable<EventoServicio> GetServiciosPorEvento(int IdEvento)
         {
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                List<EventosServicios> eventos = db.Query<EventosServicios>("select * from eventosServicios WHERE IdEvento =" + IdEvento.ToString()).ToList();
+                List<EventoServicio> eventos = db.Query<EventoServicio>("select * from eventosServicios WHERE IdEvento =" + IdEvento.ToString()).ToList();
 
                 return eventos;
             }

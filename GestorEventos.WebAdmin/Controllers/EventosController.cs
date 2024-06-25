@@ -1,17 +1,16 @@
 ﻿using GestorEventos.Servicios.Servicios;
 using GestorEventos.Servicios.Entidades;
-using GestorEventos.Servicios.Servicios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
 namespace GestorEventos.WebAdmin.Controllers
 {
     public class EventosController : Controller
     {
-        private IEventoService eventoService;
-        private IPersonaService personaService;
+        private EventoService eventoService;
+        private PersonaService personaService;
 
-        public EventosController(IEventoService _eventoService, IPersonaService _personaService)
+        public EventosController(EventoService _eventoService, PersonaService _personaService)
         {
             this.eventoService = _eventoService;
             this.personaService = _personaService;
@@ -54,7 +53,7 @@ namespace GestorEventos.WebAdmin.Controllers
                 personaAgasajada.Borrado = false;
                 personaAgasajada.Direccion = collection["Direccion"].ToString();
 
-                int IdPersonaAgasajada = personaService.AgregarNuevaPersona(personaAgasajada);
+                int IdPersonaAgasajada = personaService.AgregarNueva(personaAgasajada);
 
 
 

@@ -15,11 +15,12 @@ namespace GestorEventos.Servicios.Servicios
 
     public interface IPersonaService
     {
-        int AgregarNuevaPersona(Persona persona);
-        bool BorrarLogicamentePersona(int idPersona);
+        int AgregarNueva(Persona persona);
+        bool BorrarL(int idPersona);
+        bool BorrarF(int idPersona);
         Persona? GetPersonaSegunId(int IdPersona);
         IEnumerable<Persona> GetPersonas();
-        bool ModificarPersona(int idPersona, Persona persona);
+        bool Modificar(int idPersona, Persona persona);
     }
 
     public class PersonaService : IPersonaService
@@ -29,20 +30,20 @@ namespace GestorEventos.Servicios.Servicios
 
         private string _connectionString;
 
-        public PersonaService(){
+        public PersonaService() {
             _connectionString = "Password=wordPASS#;Persist Security Info=True;User ID=admin_1;Initial Catalog=DDBBEventos;Data Source=servidor-eventos-app.database.windows.net";
         }
 
 
-        public IEnumerable<Persona> GetPersonas(){
-            using (IDbConnection db = new SqlConnection(_connectionString)){
+        public IEnumerable<Persona> GetPersonas() {
+            using (IDbConnection db = new SqlConnection(_connectionString)) {
                 List<Persona> personas = db.Query<Persona>("SELECT * FROM Personas WHERE Borrado = 0").ToList();
 
                 return personas;
             }
         }
 
-        public Persona? GetPersonaSegunId(int IdPersona){
+        public Persona? GetPersonaSegunId(int IdPersona) {
 
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
@@ -52,99 +53,52 @@ namespace GestorEventos.Servicios.Servicios
             }
         }
 
-        public int AgregarNuevaPersona(Persona persona){
-            using (IDbConnection db = new SqlConnection(_connectionString))
+
+            public int AgregarNueva(Persona persona)
             {
-                string query = "INSERT INTO Personas " +
+                using (IDbConnection db = new SqlConnection(_connectionString))
+                {
+                    //falta agregar
+                    string query = "INSERT INTO Personas " +
                     "(Nombre, Apellido, Direccion, Telefono, Email)  " +
                     "VALUES " +
                     "( @Nombre, @Apellido, @Direccion, @Telefono, @Email); " +
                     "select  CAST(SCOPE_IDENTITY() AS INT) ";
-                persona.IdPersona = db.QuerySingle<int>(query, persona);
+                    persona.IdPersona = db.QuerySingle<int>(query, persona);
 
-
-                return persona.IdPersona;
+                    return persona.IdPersona;
+                }
             }
-        }
-
-        public bool ModificarPersona(int idPersona, Persona persona){
-
-            using (IDbConnection db = new SqlConnection(_connectionString)){
-                string query = "UPDATE Personas SET Nombre = @Nombre, Apellido = @Apellido, Direccion = @Direccion, Telefono = @Telefono, Email = @Email  WHERE IdPersona = " + idPersona.ToString();
-                db.Execute(query, persona);
-
-                return true;
-            }
-        }
-
-        public bool BorrarLogicamentePersona(int idPersona){
-
-            using (IDbConnection db = new SqlConnection(_connectionString)){
-                string query = "UPDATE Personas SET Borrado = 1 where IdPersona = " + idPersona.ToString();
-                db.Execute(query);
-
-                return true;
-
-            }
-        }
-
-        public bool BorrarFisicamentePersona(int idPersona){
-            using (IDbConnection db = new SqlConnection(_connectionString)){
-                
-                string query = "DELETE FROM dbo.Personas WHERE IdPersona = " + idPersona.ToString();
-                db.Execute(query);
-
-            /*try
+            public bool BorrarL(int idPersona)
             {
-                Persona persona = PersonasDePrueba.Where(x => x.IdPersona == IdPersona).First();
-                return persona;
-            }
-            catch (Exception ex) {
-                return null;
-            }*/
-        }
+                using (IDbConnection db = new SqlConnection(_connectionString))
+                {
+                    string query = "UPDATE Personas SET Borrado = 1 where IdPersona = " + idPersona.ToString();
+                    db.Execute(query);
 
-        public int AgregarNueva(Persona persona)
-        {
-            using (IDbConnection db = new SqlConnection(_connectionString))
+                    return true;
+                }
+            }
+            public bool BorrarF(int idPersona)
             {
-                //falta agregar
-                string query = "";
-                persona.IdPersona= db.QuerySingle<int>(query, persona);
+                using (IDbConnection db = new SqlConnection(_connectionString))
+                {
+                    string query = "DELETE FROM dbo.Personas WHERE IdPersona = " + idPersona.ToString();
+                    db.Execute(query);
 
-                return persona.IdPersona;
+                    return true;
+                }
             }
-        }
-        public bool BorrarL (int idPersona)
-        {
-            using (IDbConnection db = new SqlConnection(_connectionString))
+            public bool Modificar(int idPersona, Persona persona)
             {
-                string query= "UPDATE Personas SET Borrado = 1 where IdPersona = " + idPersona.ToString();
-                db.Execute(query);
 
-                return true;
+                using (IDbConnection db = new SqlConnection(_connectionString))
+                {
+                    string query = "UPDATE Personas SET Nombre = @Nombre, Apellido = @Apellido, Direccion = @Direccion, Telefono = @Telefono, Email = @Email  WHERE IdPersona = " + idPersona.ToString();
+                    db.Execute(query, persona);
+
+                    return true;
+                }
             }
-        }
-        public bool BorrarF(int idPersona)
-        {
-            using (IDbConnection db = new SqlConnection(_connectionString))
-            {
-                string query = "DELETE FROM dbo.Personas WHERE IdPersona = " + idPersona.ToString();
-                db.Execute(query);
-
-                return true;
-            }
-        }
-        public bool Modificar(int idPersona, Persona persona)
-        {
-
-            using (IDbConnection db = new SqlConnection(_connectionString))
-            {
-                string query = "UPDATE Personas SET Nombre = @Nombre, Apellido = @Apellido, Direccion = @Direccion, Telefono = @Telefono, Email = @Email  WHERE IdPersona = " + idPersona.ToString();
-                db.Execute(query, persona);
-
-                return true;
-            }
-        }
     }
-}
+} 
