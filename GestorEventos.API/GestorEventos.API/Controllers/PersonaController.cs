@@ -8,17 +8,22 @@ namespace GestorEventos.API.Controllers
     [Route("[controller]")]
     public class PersonaController : Controller
     {
+        private IPersonaService personaService;
+
+        public PersonaController (IPersonaService _personaService) {
+            personaService = _personaService;
+        }
+
         [HttpGet]
         public IActionResult Get() {
             return Ok(personaService.GetPersonas());
+            return Ok(personaService.GetPersonasDePrueba());
         }
 
         [HttpGet("{idPersona:int}")]
-        public IActionResult GetPersonaPorId(int idPersona) { 
-            PersonaService personaService = new PersonaService();
-            Persona? persona = personaService.GetPersonaDePruebaSegunId(idPersona);
-
+        public IActionResult GetPersonaPorId(int idPersona) {
             var persona = this.personaService.GetPersonaSegunId(idPersona);
+
 
             if (persona == null) { 
                 return NotFound();
@@ -26,13 +31,49 @@ namespace GestorEventos.API.Controllers
             else {
                 return Ok(persona);
             }
-        }
+        } 
 
         [HttpPost]
         public IActionResult PostPersona([FromBody] Persona persona) {
-            PersonaService personaService = new PersonaService();
+            personaService.AgregarNuevaPersona(persona);
+            return Ok(); 
+        }
 
-            // personaService.AddNuevaPersona(persona);
+        [HttpPut("{idPersona:int}")]
+        public IActionResult PutPersona(int idPersona, [FromBody] Persona persona) { 
+            personaService.ModificarPersona(idPersona, persona);
+            return Ok();
+        }
+
+
+        [HttpPatch("borradologico/{idPersona:int}")]
+        public ActionResult BorradoLogicoPersona(int idPersona)
+        {
+            personaService.BorrarLogicamentePersona(idPersona);
+            return Ok();
+        }
+
+        [HttpPatch("borradologico/{idPersona:int}")]
+        public IActionResult BorradoLogicoPersona(int idPersona)
+        {
+
+            personaService.BorrarL(idPersona);
+
+            return Ok();
+        }
+
+        [HttpDelete("{idPersona:int}")]
+        public IActionResult BorradoFisico(int idPersona)
+        {
+            personaService.BorrarF(idPersona);
+
+            return Ok();
+        }
+        [HttpPut("{idPersona:int}")]
+        public IActionResult PutPersona(int idPersona, [FromBody] Persona persona)
+        {
+
+            personaService.Modificar(idPersona, persona);
 
         [HttpPatch("borradoLogico/{idPersona:int}")]
         public ActionResult BorradoLogicoPersona(int idPersona)
@@ -46,6 +87,7 @@ namespace GestorEventos.API.Controllers
         {
             personaService.BorrarFisicamentePersona(idPersona);
             return Ok();
+
         }
     }
 }

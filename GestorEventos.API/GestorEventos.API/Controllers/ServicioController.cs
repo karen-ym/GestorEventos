@@ -41,5 +41,8 @@ namespace GestorEventos.Api.Controllers
             serviciosService.AgregarNuevoServicio(servicionuevo);
             return Ok();
         }
+
+
+
     }
 }
