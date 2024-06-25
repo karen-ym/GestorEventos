@@ -10,14 +10,15 @@ namespace GestorEventos.API.Controllers
     {
         [HttpGet]
         public IActionResult Get() {
-            PersonaService personaService = new PersonaService();
-            return Ok(personaService.GetPersonasDePrueba());
+            return Ok(personaService.GetPersonas());
         }
 
         [HttpGet("{idPersona:int}")]
         public IActionResult GetPersonaPorId(int idPersona) { 
             PersonaService personaService = new PersonaService();
             Persona? persona = personaService.GetPersonaDePruebaSegunId(idPersona);
+
+            var persona = this.personaService.GetPersonaSegunId(idPersona);
 
             if (persona == null) { 
                 return NotFound();
@@ -33,6 +34,17 @@ namespace GestorEventos.API.Controllers
 
             // personaService.AddNuevaPersona(persona);
 
+        [HttpPatch("borradoLogico/{idPersona:int}")]
+        public ActionResult BorradoLogicoPersona(int idPersona)
+        {
+            personaService.BorrarLogicamentePersona(idPersona);
+            return Ok();
+        }
+
+        [HttpDelete("borradoFisico/{idPersona:int}")]
+        public IActionResult BorradoFisico(int idPersona)
+        {
+            personaService.BorrarFisicamentePersona(idPersona);
             return Ok();
         }
     }
