@@ -1,4 +1,5 @@
-﻿using GestorEventos.Servicios.Entidades;
+﻿using GestorEventos.Servicios.Servicios;
+using GestorEventos.Servicios.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -49,15 +50,15 @@ namespace GestorEventos.Api.Controllers
         public IActionResult PostNuevoEvento([FromBody] Evento evento){
             EventoService eventoService = new EventoService();
             
-            eventoService.PostNuevoEvento(evento);
-            return Ok();
-            /* if (resultado)
-             {
-                 return Ok();
-             }
-             else {
-                 return UnprocessableEntity();
-             }*/
+            int resultado = eventoService.PostNuevoEvento(evento);
+
+            if (resultado)
+            {
+                return Ok();
+            }
+            else {
+                return UnprocessableEntity();
+            }
         }
 
         [HttpPost("Nuevo EventoCompleto")]

@@ -6,41 +6,43 @@ namespace GestorEventos.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PersonaController : Controller
+    public class PersonaController : ControllerBase
     {
-        private IPersonaService personaService;
+        private readonly IPersonaService personaService;
 
-        public PersonaController(IPersonaService _personaService) {
-            personaService = _personaService;
+        public PersonaController(IPersonaService personaService)
+        {
+            this.personaService = personaService;
         }
 
         [HttpGet]
-        public IActionResult Get() {
-            return Ok(personaService.GetPersonas());
-            // return Ok(personaService.GetPersonasDePrueba());
+        public IActionResult Get()
+        {
+            var personas = personaService.GetPersonas();
+            return Ok(personas);
         }
 
         [HttpGet("{idPersona:int}")]
-        public IActionResult GetPersonaPorId(int idPersona) {
-            var persona = this.personaService.GetPersonaSegunId(idPersona);
-
-
-            if (persona == null) {
+        public IActionResult GetPersonaPorId(int idPersona)
+        {
+            var persona = personaService.GetPersonaSegunId(idPersona);
+            if (persona == null)
+            {
                 return NotFound();
             }
-            else {
-                return Ok(persona);
-            }
+            return Ok(persona);
         }
 
         [HttpPost]
-        public IActionResult PostPersona([FromBody] Persona persona) {
+        public IActionResult PostPersona([FromBody] Persona persona)
+        {
             personaService.AgregarNueva(persona);
             return Ok();
         }
 
         [HttpPut("{idPersona:int}")]
-        public IActionResult PutPersona(int idPersona, [FromBody] Persona persona) {
+        public IActionResult PutPersona(int idPersona, [FromBody] Persona persona)
+        {
             personaService.Modificar(idPersona, persona);
             return Ok();
         }
@@ -48,9 +50,7 @@ namespace GestorEventos.API.Controllers
         [HttpPatch("borradologico/{idPersona:int}")]
         public IActionResult BorradoLogicoPersona(int idPersona)
         {
-
             personaService.BorrarL(idPersona);
-
             return Ok();
         }
 
