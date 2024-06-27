@@ -19,7 +19,7 @@ namespace GestorEventos.WebAdmin.Controllers
         // GET: EventosController
         public ActionResult Index()
         {
-            var eventos = this.eventoService.getAllEventoViewModel();
+            var eventos = this.eventoService.GetAllEventosViewModel();
 
             return View(eventos);
         }
