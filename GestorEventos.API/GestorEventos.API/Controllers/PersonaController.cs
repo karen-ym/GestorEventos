@@ -10,7 +10,7 @@ namespace GestorEventos.API.Controllers
     {
         private IPersonaService personaService;
 
-        public PersonaController (IPersonaService _personaService) {
+        public PersonaController(IPersonaService _personaService) {
             personaService = _personaService;
         }
 
@@ -25,23 +25,23 @@ namespace GestorEventos.API.Controllers
             var persona = this.personaService.GetPersonaSegunId(idPersona);
 
 
-            if (persona == null) { 
+            if (persona == null) {
                 return NotFound();
             }
             else {
                 return Ok(persona);
             }
-        } 
+        }
 
         [HttpPost]
         public IActionResult PostPersona([FromBody] Persona persona) {
-            personaService.AgregarNuevaPersona(persona);
-            return Ok(); 
+            personaService.AgregarNueva(persona);
+            return Ok();
         }
 
         [HttpPut("{idPersona:int}")]
-        public IActionResult PutPersona(int idPersona, [FromBody] Persona persona) { 
-            personaService.ModificarPersona(idPersona, persona);
+        public IActionResult PutPersona(int idPersona, [FromBody] Persona persona) {
+            personaService.Modificar(idPersona, persona);
             return Ok();
         }
 
@@ -49,7 +49,7 @@ namespace GestorEventos.API.Controllers
         [HttpPatch("borradologico/{idPersona:int}")]
         public ActionResult BorradoLogicoPersona(int idPersona)
         {
-            personaService.BorrarLogicamentePersona(idPersona);
+            personaService.BorrarL (idPersona);
             return Ok();
         }
 
@@ -75,19 +75,21 @@ namespace GestorEventos.API.Controllers
 
             personaService.Modificar(idPersona, persona);
 
-        [HttpPatch("borradoLogico/{idPersona:int}")]
-        public ActionResult BorradoLogicoPersona(int idPersona)
-        {
-            personaService.BorrarLogicamentePersona(idPersona);
-            return Ok();
-        }
+            [HttpPatch("borradoLogico/{idPersona:int}")]
+            public ActionResult BorradoLogicoPersona(int idPersona)
+            {
+                personaService.BorrarL(idPersona);
+                return Ok();
+            }
 
-        [HttpDelete("borradoFisico/{idPersona:int}")]
-        public IActionResult BorradoFisico(int idPersona)
-        {
-            personaService.BorrarFisicamentePersona(idPersona);
-            return Ok();
+            [HttpDelete("borradoFisico/{idPersona:int}")]
+            public IActionResult BorradoFisico(int idPersona)
+            {
+                personaService.BorrarF(idPersona);
+                return Ok();
 
+            }
         }
-    }
+    } 
 }
+
