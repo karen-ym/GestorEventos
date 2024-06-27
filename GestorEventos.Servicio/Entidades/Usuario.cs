@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GestorEventos.Servicios.Entidades
 {
-    internal class Usuario
+    public class Usuario
     {   
         public int IdUsuario { get; set; }
         public string GoogleIdentificador { get; set; }
