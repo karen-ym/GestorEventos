@@ -50,15 +50,16 @@ namespace GestorEventos.Api.Controllers
         public IActionResult PostNuevoEvento([FromBody] Evento evento){
             EventoService eventoService = new EventoService();
             
-            int resultado = eventoService.PostNuevoEvento(evento);
+            eventoService.PostNuevoEvento(evento);
 
-            if (resultado)
+            /*if (resultado)
             {
                 return Ok();
             }
             else {
                 return UnprocessableEntity();
-            }
+            }*/
+            return Ok();
         }
 
         [HttpPost("Nuevo EventoCompleto")]
