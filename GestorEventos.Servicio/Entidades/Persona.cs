@@ -9,15 +9,12 @@ namespace GestorEventos.Servicios.Entidades
 {
     public class Persona
     {
-         /* Entidad: IdPersona, Nombre, Apellido, Dirección, Teléfono, Email */
 
         public int IdPersona { get; set; }
 
         public string Nombre { get; set; }
 
-
         public string Apellido { get; set; }
-
 
         public string Direccion { get; set; }
 

@@ -8,19 +8,19 @@ namespace GestorEventos.WebAdmin.Controllers
     public class ServiciosController : Controller
     {
         //GET: ServiciosController
-        /*public ActionResult Index()
+        public ActionResult Index()
         {
-            ServiciosService serviciosService = new ServiciosService();
+            ServicioService serviciosService = new ServicioService();
             //serviciosService.GetServicios();
             return View(serviciosService.GetServicios());
-        }*/
+        }
 
         // GET: ServiciosController/Details/5
-        /*public ActionResult Details(int id)
+        public ActionResult Details(int id)
         {
-            ServiciosService serviciosService = new ServiciosService();
+            ServicioService serviciosService = new ServicioService();
             return View(serviciosService.GetServiciosPorId(id));
-        }*/
+        }
 
         // GET: ServiciosController/Create
         public ActionResult Create()

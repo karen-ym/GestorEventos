@@ -1,6 +1,8 @@
 ﻿using GestorEventos.Servicios.Entidades;
-using GestorEventos.Servicios.Servicios;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using static GestorEventos.Servicios.Servicios.IEventoService;
 
 namespace GestorEventos.Api.Controllers
 {
@@ -17,8 +19,8 @@ namespace GestorEventos.Api.Controllers
         [HttpGet]
         public IActionResult GetEventos()
         {
-            EventoService eventosService = new EventoService();
-            return Ok(eventosService.GetAllEventos());
+            EventoService eventoService = new EventoService();
+            return Ok(eventoService.GetAllEventos());
         }
 
         /// <summary>
@@ -46,9 +48,9 @@ namespace GestorEventos.Api.Controllers
         public IActionResult PostNuevoEvento([FromBody] Evento evento){
             EventoService eventoService = new EventoService();
             
-            int resultado = eventoService.PostNuevoEvento(evento);
+            bool resultado = eventoService.PostNuevoEvento(evento);
 
-            if (resultado > 0)
+            if (resultado)
             {
                 return Ok();
             }

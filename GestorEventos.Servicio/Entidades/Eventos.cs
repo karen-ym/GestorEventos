@@ -31,7 +31,6 @@ namespace GestorEventos.Servicios.Entidades
 
     public class EventoModel : Evento
     {
-        //		public Evento Evento { get; set; } 
 
         public int IdPersona { get; set; }
 

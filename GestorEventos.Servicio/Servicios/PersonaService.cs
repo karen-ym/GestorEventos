@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
-//using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using GestorEventos.Servicios.Entidades;
 
 namespace GestorEventos.Servicios.Servicios

@@ -7,10 +7,10 @@ namespace GestorEventos.WebAdmin.Controllers
 {
     public class EventosController : Controller
     {
-        private EventoService eventoService;
-        private PersonaService personaService;
+        private IEventoService eventoService;
+        private IPersonaService personaService;
 
-        public EventosController(EventoService _eventoService, PersonaService _personaService)
+        public EventosController(IEventoService _eventoService, IPersonaService _personaService)
         {
             this.eventoService = _eventoService;
             this.personaService = _personaService;
@@ -19,7 +19,7 @@ namespace GestorEventos.WebAdmin.Controllers
         // GET: EventosController
         public ActionResult Index()
         {
-            var eventos = this.eventoService.GetAllEventosViewModel();
+            var eventos = this.eventoService.getAllEventoViewModel();
 
             return View(eventos);
         }

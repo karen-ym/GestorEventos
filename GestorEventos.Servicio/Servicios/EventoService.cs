@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GestorEventos.Servicios.Servicios
 {
-    public class EventoService
+    public interface IEventoService
     {
         public interface IEventoService
         {
@@ -24,13 +24,13 @@ namespace GestorEventos.Servicios.Servicios
             bool PutNuevoEvento(int idEvento, Evento evento);
         }
 
-        public class EventosService : EventoService
+        public class EventoService : IEventoService
         {
             private string _connectionString;
 
 
 
-            public EventosService()
+            public EventoService()
             {
 
                 //Connection string 
@@ -145,7 +145,7 @@ namespace GestorEventos.Servicios.Servicios
                 eventoModel.evento.IdPersonaAgasajada = idPersonaAgasajada;
                 eventoModel.evento.Visible = true;
 
-                this.PostNuevoEvento(eventoModel.evento);
+                this.PostNuevoEvento(eventoModel.Evento);
 
                 foreach (Servicio servicio in eventoModel.ListaDeServiciosContratados)
                 {

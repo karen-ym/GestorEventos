@@ -9,10 +9,7 @@ namespace GestorEventos.Servicios.Entidades
     public class Servicio
     {
         public int IdServicio { get; set; }
-
-        // ? = declarar la variable como nulable
-        public string? Descripcion { get; set; }
-
+        public string Descripcion { get; set; }
         public decimal PrecioServicio { get; set; }
     }
 
