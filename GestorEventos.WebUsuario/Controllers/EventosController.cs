@@ -105,7 +105,7 @@ namespace GestorEventos.WebUsuario.Controllers
                 personaAgasajada.Borrado = false;
                 personaAgasajada.Direccion = collection["Direccion"].ToString();
 
-                int IdPersonaAgasajada = personaService.AgregarNuevaPersona(personaAgasajada);
+                int IdPersonaAgasajada = personaService.AgregarNueva(personaAgasajada);
 
 
 
@@ -127,7 +127,7 @@ namespace GestorEventos.WebUsuario.Controllers
 
                 foreach (var idServicio in (collection["Servicio"]))
                 {
-                    EventosServicios relacionEventoServicio = new EventosServicios();
+                    EventoServicio relacionEventoServicio = new EventoServicio();
 
                     relacionEventoServicio.IdEvento = idEventoNuevo;
                     relacionEventoServicio.IdServicio = int.Parse(idServicio.ToString());
