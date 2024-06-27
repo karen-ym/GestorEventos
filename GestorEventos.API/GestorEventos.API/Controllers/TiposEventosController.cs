@@ -12,7 +12,7 @@ namespace GestorEventos.API.Controllers
         public IActionResult Get()
         {
             TipoEventoService tipoEventoService = new TipoEventoService(); // Crea instancia TipoEventoService
-            return Ok(tipoEventoService.GetTipoEventos()); // Devuelve 200 OK una lista de eventos
+            return Ok(tipoEventoService.GetTipoEvento()); // Devuelve 200 OK una lista de eventos
         }
 
         [HttpGet("{idTipoEvento:int}")]  // La solicitud GET se utiliza para recuperar un solo objeto TipoEvento.

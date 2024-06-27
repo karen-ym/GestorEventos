@@ -17,7 +17,7 @@ namespace GestorEventos.API.Controllers
         [HttpGet]
         public IActionResult Get() {
             return Ok(personaService.GetPersonas());
-            return Ok(personaService.GetPersonasDePrueba());
+            // return Ok(personaService.GetPersonasDePrueba());
         }
 
         [HttpGet("{idPersona:int}")]
@@ -45,14 +45,6 @@ namespace GestorEventos.API.Controllers
             return Ok();
         }
 
-
-        [HttpPatch("borradologico/{idPersona:int}")]
-        public ActionResult BorradoLogicoPersona(int idPersona)
-        {
-            personaService.BorrarL (idPersona);
-            return Ok();
-        }
-
         [HttpPatch("borradologico/{idPersona:int}")]
         public IActionResult BorradoLogicoPersona(int idPersona)
         {
@@ -69,27 +61,7 @@ namespace GestorEventos.API.Controllers
 
             return Ok();
         }
-        [HttpPut("{idPersona:int}")]
-        public IActionResult PutPersona(int idPersona, [FromBody] Persona persona)
-        {
-
-            personaService.Modificar(idPersona, persona);
-
-            [HttpPatch("borradoLogico/{idPersona:int}")]
-            public ActionResult BorradoLogicoPersona(int idPersona)
-            {
-                personaService.BorrarL(idPersona);
-                return Ok();
-            }
-
-            [HttpDelete("borradoFisico/{idPersona:int}")]
-            public IActionResult BorradoFisico(int idPersona)
-            {
-                personaService.BorrarF(idPersona);
-                return Ok();
-
-            }
-        }
-    } 
+    }
+        
 }
 
