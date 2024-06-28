@@ -31,7 +31,7 @@ namespace GestorEventos.Servicios.Servicios
         private string _connectionString;
 
         public PersonaService() {
-            _connectionString = "Password=wordPASS#;Persist Security Info=True;User ID=admin_1;Initial Catalog=DDBBEventos;Data Source=servidor-eventos-app.database.windows.net";
+            _connectionString = "Password=pass0110!;Persist Security Info=True;User ID=admin_1;Initial Catalog=baseGestorServicios;Data Source=servidor-eventos-app.database.windows.net";
         }
 
 
