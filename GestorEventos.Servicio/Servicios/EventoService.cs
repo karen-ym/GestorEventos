@@ -23,7 +23,7 @@ namespace GestorEventos.Servicios.Servicios
 
     public class EventoService : IEventoService
     {
-        private readonly string _connectionString;
+        private string _connectionString;
         //comentario: inicializa la cadena de conexión a la base de datos.
         public EventoService()
         {
