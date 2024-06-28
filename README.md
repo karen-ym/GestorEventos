@@ -12,7 +12,7 @@ Karen Morel
 
 ### Base de datos
 
-* Nombre de BBDD:
+* Nombre del Servidor:
    ```sh
    servidor-eventos-app.database.windows.net
    ```
