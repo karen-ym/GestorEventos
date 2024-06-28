@@ -48,7 +48,7 @@ namespace GestorEventos.WebAdmin.Controllers
                 servicio.Descripcion = collection["Descripcion"].ToString();
                 servicio.PrecioServicio = decimal.Parse(collection["PrecioServicio"].ToString());
 
-                //servicioService.AgregarNuevoServicio(servicio);
+                servicioService.AgregarNuevoServicio(servicio);
 
                 return RedirectToAction(nameof(Index));
             }
