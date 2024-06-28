@@ -14,38 +14,47 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            background: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?fm=jpg&w=3000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+            background-size: cover;
         }
 
         .login-container {
             text-align: center;
-            background: white;
-            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 90px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-            .login-container img {
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+            .logo-container img {
+                margin: 0 30px;
                 width: 100px;
-                margin-bottom: 20px;
             }
 
-            .login-container h1 {
-                margin-bottom: 20px;
-                font-size: 24px;
-                color: #343a40;
-            }
+        .login-container h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #343a40;
+        }
 
         .google-btn {
-            background: #4285f4;
+            background-color: royalblue;
             color: white;
-            padding: 10px 20px;
+            padding: 10px 30px;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             font-size: 16px;
             cursor: pointer;
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            justify-content: center;
             transition: background 0.3s;
         }
 
@@ -62,14 +71,13 @@
 </head>
 <body>
     <div class="login-container">
-        <img src="img/logo-solterout.png" alt="Logo" style="width:auto; height: auto">
-        
-<!--        <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" style="width: auto" />
-    -->    
+        <div class="logo-container">
+            <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google Logo">
+            <img src="https://i.pinimg.com/originals/84/89/a9/8489a946bb84f04e828623d31315fddb.jpg" alt="Logo">
+        </div>
         <a class="google-btn" asp-controller="Login" asp-action="Login">
             Iniciar sesión con Google
         </a>
     </div>
- 
 </body>
-</html
+</html>
