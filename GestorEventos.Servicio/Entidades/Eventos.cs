@@ -9,6 +9,7 @@ namespace GestorEventos.Servicios.Entidades
 {
     public class Evento
     {
+        //comentario: Representa un evento básico con todas sus propiedades fundamentales.
         public int IdEvento { get; set; }
         public string NombreEvento { get; set; }
         public DateTime FechaEvento { get; set; }
@@ -26,12 +27,14 @@ namespace GestorEventos.Servicios.Entidades
     }
     public class EventoViewModel : Evento
     {
+        //comentario: Extiende Evento para añadir información adicional útil para las vistas.
         public string EstadoEvento { get; set; }
     }
 
     public class EventoModel : Evento
     {
-
+        // comentario: incluye detalles adicionales sobre la persona agasajada y los servicios contratados, permitiendo gestionar
+        // y mostrar datos más completos y detallados sobre el evento.
         public int IdPersona { get; set; }
 
         public string Nombre { get; set; }

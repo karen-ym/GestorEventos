@@ -11,6 +11,7 @@ namespace GestorEventos.Servicios.Servicios
 {
     public interface IEventoService
     {
+        //comentario: La interfaz IEventoService define los métodos que el servicio debe implementar
         bool DeleteEvento(int idEvento);
         IEnumerable<Evento> GetAllEventos();
         IEnumerable<EventoViewModel> GetAllEventosViewModel();
@@ -23,7 +24,7 @@ namespace GestorEventos.Servicios.Servicios
     public class EventoService : IEventoService
     {
         private readonly string _connectionString;
-
+        //comentario: inicializa la cadena de conexión a la base de datos.
         public EventoService()
         {
             // Connection string 
@@ -32,6 +33,7 @@ namespace GestorEventos.Servicios.Servicios
 
         public IEnumerable<Evento> GetAllEventos()
         {
+            //comentario: Este método obtiene todos los eventos que no han sido borrados lógicamente "borrado=0"
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 return db.Query<Evento>("SELECT * FROM Eventos WHERE Borrado = 0").ToList();
@@ -40,6 +42,7 @@ namespace GestorEventos.Servicios.Servicios
 
         public IEnumerable<EventoViewModel> GetMisEventos(int idUsuario)
         {
+            //comentario: obtiene los eventos de un usuario especifico 
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 return db.Query<EventoViewModel>("SELECT eventos.*, EstadosEventos.Descripcion AS EstadoEvento FROM eventos LEFT JOIN EstadosEventos ON EstadosEventos.IdEstadoEvento = eventos.idEstadoEvento WHERE eventos.IdUsuario = @IdUsuario", new { IdUsuario = idUsuario }).ToList();
@@ -48,6 +51,7 @@ namespace GestorEventos.Servicios.Servicios
 
         public IEnumerable<EventoViewModel> GetAllEventosViewModel()
         {
+            //comentario: obtiene todos los eventos y sus estados, devolviéndolos como una lista
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 List<EventoViewModel> eventos = db.Query<EventoViewModel>("select eventos.*, EstadosEventos.Descripcion EstadoEvento from eventos left join EstadosEventos on EstadosEventos.IdEstadoEvento = eventos.idEstadoEvento").ToList();
@@ -66,6 +70,7 @@ namespace GestorEventos.Servicios.Servicios
 
         public int PostNuevoEvento(Evento evento)
         {
+            //comentario: inserta un nuevo evento en la base de datos y devuelve el ID del evento recién creado.
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 string query = "INSERT INTO Eventos (NombreEvento, FechaEvento, CantidadPersonas, IdPersonaAgasajada, Visible) VALUES (@NombreEvento, @FechaEvento, @CantidadPersonas, @IdPersonaAgasajada, @Visible); SELECT CAST(SCOPE_IDENTITY() AS int)";
@@ -75,6 +80,7 @@ namespace GestorEventos.Servicios.Servicios
 
         public bool PutNuevoEvento(int idEvento, Evento evento)
         {
+            //comentario: actualiza un evento existente en la base de datos.
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 string query = "UPDATE Eventos SET NombreEvento = @NombreEvento, FechaEvento = @FechaEvento, CantidadPersonas = @CantidadPersonas, IdPersonaAgasajada = @IdPersonaAgasajada WHERE IdEvento = @IdEvento";
@@ -94,6 +100,7 @@ namespace GestorEventos.Servicios.Servicios
         }
         public void PostNuevoEventoCompleto(EventoModel eventoModel)
         {
+            //comentario: creación de un evento completo, incluyendo la persona agasajada y los servicios contratados, añade una nueva persona usando PersonaService
             PersonaService personaService = new PersonaService();
             int idPersonaAgasajada = personaService.AgregarNueva(eventoModel.personaAgasajada);
 

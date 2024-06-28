@@ -7,6 +7,7 @@ namespace GestorEventos.WebAdmin.Controllers
 {
     public class EventosController : Controller
     {
+        // comentario: utiliza dos servicios, IEventoService y IPersonaService, inyectados a través del constructor.
         private IEventoService eventoService;
         private IPersonaService personaService;
 
@@ -19,6 +20,7 @@ namespace GestorEventos.WebAdmin.Controllers
         // GET: EventosController
         public ActionResult Index()
         {
+            //comentario: devuelve una vista con una lista de todos los eventos, obtenida a través del servicio eventoService.
             var eventos = this.eventoService.GetAllEventosViewModel();
 
             return View(eventos);
@@ -27,12 +29,14 @@ namespace GestorEventos.WebAdmin.Controllers
         // GET: EventosController/Details/5
         public ActionResult Details(int id)
         {
+            //comentario: muestra los detalles de un evento específico.
             return View();
         }
 
         // GET: EventosController/Create
         public ActionResult Create()
         {
+            //comentario: devuelve la vista para crear un nuevo evento.
             return View();
         }
 
@@ -41,6 +45,8 @@ namespace GestorEventos.WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
+            //comentario: Recibe los datos del formulario a través de IFormCollection, crea una nueva persona y un nuevo evento, y los guarda utilizando los servicios correspondientes. Si tiene éxito,
+            //redirige a la acción Index. En caso de error, devuelve la misma vista.
 
             try
             {
@@ -85,6 +91,7 @@ namespace GestorEventos.WebAdmin.Controllers
         {
             return View();
         }
+        //La acción GET Edit muestra la vista de edición de un evento específico. La acción POST Edit maneja la actualización de un evento específico
 
         // POST: EventosController/Edit/5
         [HttpPost]
