@@ -1,6 +1,6 @@
 ## Trabajo práctico de C# y .NET
 
-Este trabajo práctico abarca la creación de una web app de Despedida de Solteras/os mediante la explicación del modelo MVC (Modelo-Vista-Controlador). Se utilizó el lenguaje C#, el framework .NET, el entorno de desarrollo integrado Microsoft Visual Studio, la creación de una base de datos con Microsoft SQL Server (mediante la ejecución de un script provisto por el profesor) en colaboración con Azure para subirla a la nube y autenticación con Google.
+Este trabajo práctico abarca la creación de una web app de Despedida de Solteras/os mediante la aplicación del modelo MVC (Modelo-Vista-Controlador). Se utilizó el lenguaje C#, el framework .NET, el entorno de desarrollo integrado Microsoft Visual Studio, la creación de una base de datos con Microsoft SQL Server (mediante la ejecución de un script provisto por el profesor) en colaboración con Azure para subirla a la nube y autenticación con Google.
 
 ### Integrantes
 
@@ -22,7 +22,7 @@ Karen Morel
    ```
 * Contraseña:
    ```sh
-   wordPASS#
+   pass0110!
    ```
 
 ## Instrucciones para Iniciar el Sistema
