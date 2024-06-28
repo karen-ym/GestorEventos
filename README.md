@@ -46,4 +46,4 @@ Karen Morel
 
 ### Acceso a la página que contiene la app
 
-[Ver la app en línea](https://google.com) <!-- // COMPLETAR LUEGO -->
+[Ver la app en línea](https://gala-eventos.azurewebsites.net/) <!-- // COMPLETAR LUEGO -->
