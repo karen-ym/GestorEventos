@@ -25,13 +25,15 @@ namespace GestorEventos.WebUsuario.Controllers
         // GET: EventosController
         public ActionResult Index()
         {
+            int idUsuario;
+            var claim = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "userGestor");
 
-            int idUsuario = int.Parse(
-                    HttpContext.User.Claims.First(x => x.Type == "userGestor").Value);
-
-            var eventos = this.eventoService.GetMisEventos(idUsuario);
-
-            return View(eventos);
+            if (claim != null && int.TryParse(claim.Value, out idUsuario))
+            {
+                var eventos = this.eventoService.GetMisEventos(idUsuario);
+                return View(eventos);
+            }
+            return RedirectToAction("Error", "Home");
         }
 
         // GET: EventosController/Details/5
