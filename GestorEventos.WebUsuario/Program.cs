@@ -56,7 +56,7 @@ builder.Services.AddAuthentication(opciones =>
         //ctx.Identity.
         //   usuarioServicio.GetUsuarioPorGoogleSubject(ctx.Identity.Claims)
         // Agregar reclamaciones personalizadas aquí
-        ctx.Identity.AddClaim(new System.Security.Claims.Claim("usuarioSolterout", idUsuario.ToString()));
+        ctx.Identity.AddClaim(new System.Security.Claims.Claim("userGestor", idUsuario.ToString()));
 
         var accessToken = ctx.AccessToken;
         ctx.Identity.AddClaim(new System.Security.Claims.Claim("accessToken", accessToken));

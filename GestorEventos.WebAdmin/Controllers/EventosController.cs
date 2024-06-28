@@ -69,7 +69,7 @@ namespace GestorEventos.WebAdmin.Controllers
 
                 eventoNuevo.CantidadPersonas = int.Parse(collection["CantidadPersonas"].ToString());
                 eventoNuevo.Visible = true;
-                eventoNuevo.IdUsuario = int.Parse(HttpContext.User.Claims.First(x => x.Type == "usuarioSolterout").Value); // HttpContext.User.Identity.Id;
+                eventoNuevo.IdUsuario = int.Parse(HttpContext.User.Claims.First(x => x.Type == "userGestor").Value); // HttpContext.User.Identity.Id;
                 eventoNuevo.FechaEvento = DateTime.Parse(collection["FechaEvento"].ToString());
                 eventoNuevo.IdTipoEvento = int.Parse(collection["IdTipoEvento"].ToString());
                 eventoNuevo.NombreEvento = collection["NombreEvento"].ToString();
