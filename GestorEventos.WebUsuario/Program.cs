@@ -15,7 +15,6 @@ builder.Services.AddScoped<IPersonaService, PersonaService>();
 builder.Services.AddScoped<IServicioService, ServicioService>();
 builder.Services.AddScoped<IEventosServiciosService, EventosServiciosService>();
 
-
 builder.Services.AddAuthentication(opciones =>
 {
     opciones.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -32,19 +31,28 @@ builder.Services.AddAuthentication(opciones =>
     {
         var usuarioServicio = ctx.HttpContext.RequestServices.GetRequiredService<IUsuarioService>();
 
-        string googleNameIdentifier = ctx.Identity.Claims.First(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value.ToString(); ;
+        string googleNameIdentifier = ctx.Identity.Claims.First(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value.ToString();
 
         var usuario = usuarioServicio.GetUsuarioPorGoogleSubject(googleNameIdentifier);
         int idUsuario = 0;
         if (usuario == null)
         {
             Usuario usuarioNuevo = new Usuario();
-            usuarioNuevo.Apellido = ctx.Identity.Claims.First(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname").Value.ToString();
-            usuarioNuevo.Nombre = ctx.Identity.Claims.First(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname").Value.ToString();
-            usuarioNuevo.NombreCompleto = ctx.Identity.Claims.First(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name").Value.ToString();
+
+            var apellidoClaim = ctx.Identity.Claims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname");
+            usuarioNuevo.Apellido = apellidoClaim != null ? apellidoClaim.Value : string.Empty;
+
+            var nombreClaim = ctx.Identity.Claims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname");
+            usuarioNuevo.Nombre = nombreClaim != null ? nombreClaim.Value : string.Empty;
+
+            var nombreCompletoClaim = ctx.Identity.Claims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name");
+            usuarioNuevo.NombreCompleto = nombreCompletoClaim != null ? nombreCompletoClaim.Value : string.Empty;
+
             usuarioNuevo.GoogleIdentificador = googleNameIdentifier;
             usuarioNuevo.Borrado = false;
-            usuarioNuevo.Email = ctx.Identity.Claims.First(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress").Value.ToString();
+
+            var emailClaim = ctx.Identity.Claims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress");
+            usuarioNuevo.Email = emailClaim != null ? emailClaim.Value : string.Empty;
 
             idUsuario = usuarioServicio.AgregarNuevoUsuario(usuarioNuevo);
 
@@ -53,8 +61,7 @@ builder.Services.AddAuthentication(opciones =>
         {
             idUsuario = usuario.IdUsuario;
         }
-        //ctx.Identity.
-        //   usuarioServicio.GetUsuarioPorGoogleSubject(ctx.Identity.Claims)
+
         // Agregar reclamaciones personalizadas aquí
         ctx.Identity.AddClaim(new System.Security.Claims.Claim("userGestor", idUsuario.ToString()));
 
@@ -71,7 +78,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
